@@ -13,7 +13,6 @@ export default function ForgotPassword() {
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔹 Send OTP again
   const handleResend = async () => {
     try {
       setLoading(true);
@@ -31,7 +30,6 @@ export default function ForgotPassword() {
     }
   };
 
-  // 🔹 Verify OTP
   const handleVerify = async () => {
     if (!otp)
       return toast("Enter OTP", { icon: "⚠️", style: { background: "#fff9e6", color: "#b58900" } });
@@ -51,7 +49,6 @@ export default function ForgotPassword() {
     }
   };
 
-  // 🔹 Reset Password
   const handleReset = async () => {
     if (!newPassword)
       return toast("Enter new password", { icon: "⚠️", style: { background: "#fff9e6", color: "#b58900" } });
@@ -72,37 +69,48 @@ export default function ForgotPassword() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white p-6">
+    <div className="min-h-screen flex items-center justify-center bg-white px-4 sm:px-6 lg:px-8">
       <Toaster position="top-right" />
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6 border border-yellow-100">
-        <h1 className="text-3xl font-bold text-gray-800 text-center">Forgot Password</h1>
+      <div
+        className="
+          w-full
+          sm:max-w-md lg:max-w-lg
+          bg-white rounded-2xl shadow-lg
+          p-6 sm:p-8
+          space-y-6
+          border border-yellow-100
+        "
+      >
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 text-center">
+          Forgot Password
+        </h1>
 
         {/* Email */}
         <div>
-          <label className="block text-gray-700 mb-1">Email</label>
+          <label className="block text-gray-700 mb-1 text-sm sm:text-base">Email</label>
           <input
             type="email"
             value={email}
             readOnly
-            className="w-full border border-gray-200 rounded-lg px-4 py-2 bg-gray-50 cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-yellow-200"
+            className="w-full border border-gray-200 rounded-lg px-4 py-2 bg-gray-50 cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-yellow-200 text-sm sm:text-base"
           />
         </div>
 
         {/* OTP */}
         <div>
-          <label className="block text-gray-700 mb-1">OTP</label>
-          <div className="flex space-x-2">
+          <label className="block text-gray-700 mb-1 text-sm sm:text-base">OTP</label>
+          <div className="flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
             <input
               type="text"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               placeholder="Enter OTP"
-              className="flex-1 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-200"
+              className="flex-1 border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-200 text-sm sm:text-base"
             />
             <button
               onClick={handleVerify}
               disabled={loading}
-              className="px-4 py-2 bg-yellow-200 text-gray-800 rounded-lg hover:bg-yellow-300 disabled:opacity-50"
+              className="px-4 py-2 bg-yellow-200 text-gray-800 rounded-lg hover:bg-yellow-300 disabled:opacity-50 text-sm sm:text-base"
             >
               Verify
             </button>
@@ -110,7 +118,7 @@ export default function ForgotPassword() {
           <button
             onClick={handleResend}
             disabled={loading}
-            className="text-sm text-yellow-600 mt-1 hover:underline"
+            className="text-sm text-yellow-600 mt-2 hover:underline"
           >
             Resend OTP
           </button>
@@ -118,14 +126,14 @@ export default function ForgotPassword() {
 
         {/* New Password */}
         <div>
-          <label className="block text-gray-700 mb-1">New Password</label>
+          <label className="block text-gray-700 mb-1 text-sm sm:text-base">New Password</label>
           <input
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             disabled={!isOtpVerified}
             placeholder="Enter new password"
-            className={`w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-200 ${
+            className={`w-full border border-gray-200 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-200 text-sm sm:text-base ${
               !isOtpVerified ? "bg-gray-50 cursor-not-allowed" : ""
             }`}
           />
@@ -134,7 +142,7 @@ export default function ForgotPassword() {
         <button
           onClick={handleReset}
           disabled={!isOtpVerified || loading}
-          className="w-full py-2 bg-yellow-300 text-gray-800 font-semibold rounded-lg hover:bg-yellow-400 disabled:opacity-50 transition"
+          className="w-full py-2 bg-yellow-300 text-gray-800 font-semibold rounded-lg hover:bg-yellow-400 disabled:opacity-50 transition text-sm sm:text-base"
         >
           Reset Password
         </button>
